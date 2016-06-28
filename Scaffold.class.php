@@ -38,6 +38,20 @@ class Scaffold{
 		return true;
 	}
 
+	public static function onSetupAfterCache () {
+		$cd = dirname(__FILE__);
+
+		$GLOBALS['egScaffoldBasePath'] = __DIR__;
+		$GLOBALS['egScaffoldBaseURL'] = $GLOBALS['wgStylePath'].'/'.basename(__DIR__);
+
+		//load skin variants
+		// require( $cd . '/layouts/base/Base.php' );
+		// require( $cd . '/layouts/default/Default.php' );
+
+		// Scaffold::init();
+
+	}
+
 	public static function onInit( $fn ){
 		array_push(self::$initHandlers, $fn);
 	}

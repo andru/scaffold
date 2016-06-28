@@ -33,10 +33,11 @@
       }
     },
     "skins.scaffold.bootstrap.js": {
-      "position": "bottom",
+      "position": "top",
       "scripts": [
         "resources/bootstrap-3.0.3/js/bootstrap.js"
-      ]
+      ],
+			"dependencies": ["jquery"]
     },
 		"skins.scaffold": {
 			"class": "ResourceLoaderSkinModule",
@@ -56,6 +57,18 @@
 				"layouts/base/js/init.js"
 			],
       "dependencies": ["skins.scaffold.bootstrap.js"]
+		},
+		"skins.scaffold.layouts.default.css": {
+			"class": "ResourceLoaderSkinModule",
+			"position": "top",
+			"styles": {
+				"layouts/default/css/layout.less": {
+					"media": "screen"
+				},
+				"layouts/default/css/content.less": {
+					"media": "screen"
+				}
+			}
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -66,18 +79,20 @@
     "Scaffold": "Scaffold.class.php",
 		"SkinScaffold": "Skin.php",
 		"ScaffoldTemplate": "Template.php",
-		"\\Scaffold\\Layouts\\Base": "layouts/base/Base.php",
-		"\\Scaffold\\Layouts\\DefaultLayout": "layouts/default/Default.php"
+		"Scaffold\\Layouts\\Base": "layouts/base/Base.php",
+		"Scaffold\\Layouts\\DefaultLayout": "layouts/default/Default.php",
 	},
   "config": {
       "_prefix": "egScaffold",
       "Layouts": {
-				"default": "DefaultLayout"
+				"base": "Scaffold\\Layouts\\Base",
+				"default": "Scaffold\\Layouts\\DefaultLayout",
 			},
 			"DefaultLayout": "default"
   },
 	"Hooks": {
-		"BeforeInitialize": ["Scaffold::init"]
+		"BeforeInitialize": ["Scaffold::init"],
+		"SetupAfterCache": ["Scaffold::onSetupAfterCache"]
 	},
 	"manifest_version": 1
 }
