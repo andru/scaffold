@@ -8,27 +8,31 @@ class SkinScaffold extends \Skinny\Skin {
 	public static $modules = array();
 
 	public $skinname = 'scaffold';
-	public $stylename = 'scaffold';
-	//default template, this can be changed by skin layouts
+	public $stylename = 'Scaffold';
 	public $template = 'ScaffoldTemplate';
 	public $useHeadElement = true;
 
 
-	public static function init(){
-
-	}
-
+	// public static function init(){
+	// 	// self::loadModules('skins.scaffold.bootstrap.js');
+	// 	self::loadModules('skins.scaffold.js');
+	// }
+	//
 
 	public function initPage( OutputPage $out ) {
+		parent::initPage( $out );
+
 		$baseURL = $GLOBALS['egScaffoldBaseURL'];
 
 		//add the css modules separately to prevent a FOUC
 		$out->addModuleStyles( 'skins.scaffold.bootstrap.css' );
 		$out->addModuleStyles( 'skins.scaffold');
-		$out->addModuleStyles( 'skins.scaffold.font-awesome' );
+		$out->addModuleStyles( 'skins.scaffold.fontawesome' );
 
 		//js items will be appended after page load
+		$out->addModules( 'skins.scaffold.bootstrap.js' );
 		$out->addModules( 'skins.scaffold.js' );
+
 
 		//since we're using theb mediawiki generated head element, we have to add the viewport meta tag
 		//so the layout scaled properly to mobile devices
@@ -51,8 +55,6 @@ class SkinScaffold extends \Skinny\Skin {
 		}");
 
 		$out->addHeadItem('meta-viewport', '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">');
-
-		parent::initPage( $out );
 
 	}
 

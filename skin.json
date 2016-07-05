@@ -37,7 +37,7 @@
       "scripts": [
         "resources/bootstrap-3.0.3/js/bootstrap.js"
       ],
-			"dependencies": ["jquery"]
+			"dependencies": []
     },
 		"skins.scaffold": {
 			"class": "ResourceLoaderSkinModule",
@@ -52,7 +52,7 @@
 			}
 		},
 		"skins.scaffold.js": {
-			"position": "bottom",
+			"position": "top",
 			"scripts": [
 				"layouts/base/js/init.js"
 			],
@@ -80,13 +80,13 @@
 		"SkinScaffold": "Skin.php",
 		"ScaffoldTemplate": "Template.php",
 		"Scaffold\\Layouts\\Base": "layouts/base/Base.php",
-		"Scaffold\\Layouts\\DefaultLayout": "layouts/default/Default.php",
+		"Scaffold\\Layouts\\DefaultLayout": "layouts/default/Default.php"
 	},
   "config": {
       "_prefix": "egScaffold",
       "Layouts": {
 				"base": "Scaffold\\Layouts\\Base",
-				"default": "Scaffold\\Layouts\\DefaultLayout",
+				"default": "Scaffold\\Layouts\\DefaultLayout"
 			},
 			"DefaultLayout": "default"
   },

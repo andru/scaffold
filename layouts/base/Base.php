@@ -3,15 +3,19 @@ namespace Scaffold\Layouts;
 
 class Base extends \Skinny\Layout {
 
+	protected $debug = true;
+
 	protected $contentClass = '';
 
 	protected $showNavBar = true;
+
+	protected $showTitle = true;
 
 	protected $showSharedSidebar = true;
 	protected $sharedSidebarPosition = 'right';
 
 	protected $showFancyToc = true;
-	protected $fancyTocZone = 'shared-sidebar';
+	protected $fancyTocZone = 'prepend:shared-sidebar';
 
 	protected $showSearch = true;
 	protected $searchZone = 'navbar-center';
@@ -25,7 +29,7 @@ class Base extends \Skinny\Layout {
 	protected $showUserMenu = true;
 	protected $userMenuTitleAsUsername = true;
 
-	protected $showBreadcrumbs = true;
+	protected $showBreadcrumbs = false;
 	protected $breadcrumbsZone = 'prepend:title';
 
 	//map content_navigation array keys to glyphicon names
@@ -156,6 +160,10 @@ class Base extends \Skinny\Layout {
 		//allow for a full-width hero unit above the content
 	  $this->addHookTo('before:lower-container', 'hero');
 
+		if ($this->showTitle) {
+			$this->addTemplateTo('title', 'title');
+		}
+
 
 		//add a shared sidebar
 		if($this->showSharedSidebar){
@@ -173,7 +181,6 @@ class Base extends \Skinny\Layout {
 			}else{
 
 			}
-
 		}
 
 
@@ -182,9 +189,17 @@ class Base extends \Skinny\Layout {
 			if(\Skinny::hasContent('toc')){
 				$this->addHTMLTo('content-container.class', 'has-toc');
 			}
-
 			$this->addTemplateTo($this->fancyTocZone, 'fancy-toc');
 		}
+
+		$this->addTemplateTo('content', 'content');
+
+
+		//TODO: use the footer-links and footer-icons zones defined by Layout
+		$this->addTemplateTo('footer', 'footer', array(
+			'icons'=>$this->getTemplate()->getFooterIcons( "icononly" ),
+			'links'=>$this->getTemplate()->getFooterLinks( "flat" )
+		));
 
 
 	}

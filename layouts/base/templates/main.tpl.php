@@ -1,9 +1,10 @@
-<?php 
-$this->insert('head'); 
+<?php
+$this->insert('head');
 $this->insert('after:head');
-$this->insert('prepend:body');
 $this->insert('before:page');
-
+?>
+<?php
+$this->insert('prepend:body');
 ?>
 	<div id="page">
 	<?php
@@ -27,10 +28,9 @@ $this->insert('before:lower-container');
 					<?php $this->attach('notice'); ?>
 					<?php $this->attach('title'); ?>
 					<?php $this->prepend('content'); ?>
-					
-					<div id="bodyContent">
 
-						<?php 
+					<div id="bodyContent" class="mw-body">
+						<?php
 					/* @todo: Cleanup the following bits; they're basically
 										flash messages which show in certain scenarios
 										and could be unified into a single template type */ ?>
@@ -70,9 +70,10 @@ $this->insert('footer');
 $this->insert('after:footer');
 ?>
 </div><!--/#page-->
+<div id="footer" role="contentinfo">
+</div>
 <?php
 $this->insert('append:body');
-
-echo Html::closeElement( 'body' );
-echo Html::closeElement( 'html' );
 ?>
+</body>
+</html>

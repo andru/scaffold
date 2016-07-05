@@ -11,17 +11,10 @@
 @import (reference) "../../../resources/font-awesome-4.0.3/less/variables.less";
 @import (reference) "../../../resources/font-awesome-4.0.3/less/core.less";
 
-@import (reference) "../../../lib/flexbox.less";
+@import (reference) "../../../resources/flexbox.less";
 
-@background-color:#fff;
+@import (reference) "./variables.less";
 
-@navbar-bg-color: #ccc;
-@navbar-text-color: #000;
-
-@inverse-text-color: #fff;
-@accent-color: red;
-
-@new-link-color: red;
 
 html{
 
@@ -51,6 +44,12 @@ a.external:before{
 /* Override default styles for VisualEditor. body tag selector gives higher specificity than the
 VisualEditor selectors, which will be appended to the page *after* this file */
 body{
+	.flexbox();
+	.flex-direction(column);
+	height:100%;
+	height:100vh;
+	overflow:hidden;
+
 
 	/* By default make toolbar always static, we'll override it for larger displays */
 	.ve-ui-surfaceToolbar-floating .ve-ui-toolbar-bar,
@@ -77,6 +76,16 @@ body{
 	}
 }
 
+
+
+#top-nav{
+	flex:0 0 50px;
+	.flexbox();
+	.flex-direction(row);
+
+	border:none;
+}
+
 /* Give the various iframes VisualEditor embeds a white background */
 .ve-ui-frame-body{
 	background:white;
@@ -87,8 +96,16 @@ body{
 body{
 	background: @background-color;
 
+	#content{
+		a{
+			color: @accent-color;
+		}
+		a:hover{
+			color:lighten(@accent-color,10%);
+		}
+	}
+
 	@media (min-width: @screen-sm-min) {
-		padding-top:60px;
 
 		/* Extra padding when VisualEditor toolbar is displayed fixed */
 		&.veaction-edit{
@@ -137,15 +154,18 @@ html{
 }
 body{
 	min-height:100vh;
+
 	#page{
 		@media screen {
 			.flexbox();
 			.flex-direction(column);
 			.align-content(stretch);
+			.flex-grow(1);
+			.flex-shrink(0);
+			flex: 1 0;
+			overflow-y: scroll;
 		}
 
-
-		min-height: 100vh;
 
 		#lower-container{
 			.flex-grow(1);
@@ -164,12 +184,13 @@ body{
 #main-footer{
 	position:relative;
 
-	padding:20px 0;
-
 	margin:20px 0 0 0;
 
-	background-color:darken(@background-color, 20%);
+	background-color:darken(@background-color, 5%);
 
+	.container {
+		padding:20px 0;
+	}
 
 	#f-links{
 		list-style-type: none;
@@ -236,25 +257,35 @@ body{
 	.glyphicon-edit;
 }*/
 
+/* Hide toolbox menu for non-logged in users */
+body:not(.user-loggedin) .toolbox-menu{
+	display:none !important;
+}
+
 
 /* Rules which affect more or less all navbar styles */
 #top-nav{
-	position:static;
+
+	margin-bottom:0;
+	border-radius:0;
 
 	.container{
 		position:relative;
 	}
 
+	.container
+
 	.navbar-menu-toggle{
-		position:absolute;
 		left:5px;
 		top:0;
 		.icon{
 			font-size:2em;
 		}
 		.navbar-toggle{
-			float:none;
 			margin:0;
+		}
+		button{
+			color:@navbar-text-color;
 		}
 	}
 
@@ -265,8 +296,8 @@ body{
 		text-align:center;
 	}
 
+
 	@media (min-width: @screen-sm-min) {
-		position:fixed;
 
 		//menus are collapsed by default, but they should be visible on higher resolutions
 		.navbar-menu.collapse{
@@ -288,11 +319,48 @@ body{
 
 }
 
+@media (min-width: @screen-sm-min) {
+	/* Correct display errors when using flexbox */
+	.navbar:before, .navbar:after,
+	#top-nav .container:before, #top-nav .container:after{
+		display:none !important;
+	}
+}
 
 /* Rules for the default navbar style */
 #top-nav.default{
 	#gradient .vertical(lighten(@navbar-bg-color, 2%); darken(@navbar-bg-color, 2%));
 	color: @navbar-text-color;
+
+	a{
+		color: @navbar-text-color;
+	}
+
+	.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+	    background-color: @accent-color;
+	}
+	.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: @accent-color;
+	}
+	.dropdown-menu{
+		background-color: @accent-color;
+		border-color:lighten(@accent-color,10%)
+	}
+	.dropdown-menu .divider{
+		background-color:lighten(@accent-color,20%)
+	}
+	.dropdown-menu > li > a:focus {
+		background-color: @accent-color;
+	}
+	.dropdown-menu > li > a:hover{
+		background-color: darken(@accent-color, 8%)
+	}
+
+	.navbar-brand .topnav-name{
+		font-weight: bold;
+		font-size: 120%;
+	}
 
 
 	@media (max-width: @screen-sm-min){
@@ -307,7 +375,6 @@ body{
 
 		.navbar-search{
 			display:block;
-			margin-bottom:5px;
 		}
 
 	}
@@ -323,6 +390,10 @@ body{
 
 	@media (min-width: @screen-sm-min) {
 
+		.navbar-menu-toggle{
+			display: none;
+		}
+
 		.container{
 			.flexbox();
 			.flex-direction(row);
@@ -331,9 +402,12 @@ body{
 		}
 
 		.navbar-search{
-			-webkit-flex:1; //for safari 7
+			flex:1 1;
+			display: flex;
+    	align-items: flex-end;
+    	justify-content: center;
 			form{
-
+    		flex: 0 1 300px;
 			}
 		}
 
@@ -377,35 +451,31 @@ body{
 
 #content-container{
 
-	//display: flex;
-	//flex-direction: column;
 	padding-top:0;
 
 	#content{
 		flex:1;
 		order:2;
 
-		/* The standard inline TOC is visible on mobile devices */
+		/* Hide standard TOC */
 		.toc{
-			display:block;
+			display:none;
 		}
 	}
 
-	#shared-sidebar{
-		.flexbox();
-		.flex-direction(row);
-		.justify-content(start);
+	.shared-sidebar{
+		flex-basis: 200px;
+		.fancy-toc{
+			margin-top:20px;
+		}
 
 		/* The sidebar TOC is hidden on mobile devices */
 		.toc{
 			display:none;
 		}
+
 	}
 	nav#related{
-		.flexbox();
-		.flex-direction(row);
-		.justify-content(start);
-		order:3;
 
 		margin:20px 0 0 0;
 
@@ -421,30 +491,64 @@ body{
 	@media (min-width: @screen-md-min) {
 
 		/* Bigger screens get sidebars */
+		.flexbox();
 		.flex-direction(row);
 
-		#content{
-			order: 1;
-		}
+		&.has-toc{
+			#content{
+				order: 2;
 
-		#shared-sidebar{
-			.flex-direction(column);
+				.toc{
+					display: none;
+				}
+			}
+			.shared-sidebar{
+				padding:0 20px 0 0;
 
-			order: 2;
-			margin: 0 0 0 20px;
-			.toc{
-				display:block;
+				.toc{
+					display:block;
+					h2{
+						font-size:1.3em;
+					}
+					& > ul{
+						padding:5px;
+						list-style:none;
+						ul {
+							list-style: none;
+							margin-left: 5px;
+							padding: 0;
+							font-size:90%;
+						}
+					}
+					a{
+						color: #555;
+					}
+				}
 			}
 		}
 
+		.shared-sidebar{
+			.flexbox();
+			.flex-direction(row);
+			.flex-direction(column);
+
+			order: 1;
+			margin: 0 20px 0 0;
+
+		}
+
 		nav#related{
+			.flexbox();
+			.flex-direction(row);
+			.justify-content(start);
+			order:3;
 			.flex-basis(150px);
 			.flex-direction(column);
 
 			margin: 0 0 0 20px;
 
 			.related-nav-section{
-
+				flex: 0 0 150px;
 			}
 		}
 	}

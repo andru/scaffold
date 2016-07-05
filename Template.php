@@ -8,6 +8,8 @@ class ScaffoldTemplate extends \Skinny\Template {
 	protected $showLanguages = false;
 	protected $languages = array();
 
+	protected $showTagline = false;
+
 	protected function initialize(){
 
 		$this->addTemplatePath( dirname(__FILE__).'/templates' );

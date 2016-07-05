@@ -1,1 +1,1 @@
-<?php echo $content_html ?>
+<?php $this->attach('content-html'); ?>
