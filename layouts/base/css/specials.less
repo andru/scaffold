@@ -1,0 +1,131 @@
+#preferences{
+	legend.mainLegend{
+		display:none;
+	}
+
+	.mw-label{
+		label{
+			padding-right:10px;
+		}
+	}
+
+	fieldset{
+		legend{
+			font-size:1.4em;
+		}
+		padding-bottom:25px;
+
+		margin-bottom:25px;
+	}
+}
+#preftoc{
+	list-style:none;
+	padding:0;
+	margin:0;
+
+	background: @navbar-bg-color;
+	border-radius:5px;
+
+	margin-bottom:30px;
+
+	.flexbox();
+	.flex-wrap(wrap);
+	.justify-content(space-around);
+	li{
+		a{
+			display:inline-block;
+			padding:10px 20px;
+		}
+		&.selected{
+			a{
+				color:@accent-color;
+			}
+		}
+	}
+
+}
+
+
+.mw-specialpagesgroup{
+	margin-bottom:20px;
+}
+.mw-specialpages-table{
+	//on a tiny screen, show the special pages 2-column layout as one column
+	@media (max-width: @screen-xs-min){
+		display:block;
+		tbody, tr, td{
+			display:block;
+			width:100% !important;
+			padding:0;
+			margin:0;
+		}
+		//hide the table cell usually used as a column gutter
+		td:nth-child(2){
+			display:none;
+		}
+		//remove the padding on the ul in the first cell
+		td:first-child ul{
+			margin-bottom:0;
+		}
+	}
+
+	//on everything but high screen resolution, undo the 30% column on the right
+	@media (max-width: @screen-lg-min){
+		//hide the table cell usually used as a column gutter
+		td:nth-child(1),
+		td:nth-child(3){
+			width:40%;
+		}
+		td:nth-child(2){
+			width:10%;
+		}
+		td:nth-child(4){
+			display:none;
+		}
+	}
+}
+
+.firstHeading{
+	padding-top:0;
+}
+
+#toc{
+	#toctitle{
+		h2{
+			display: inline-block;
+			margin-bottom:5px;
+			font-size:1em;
+		}
+	}
+	ul{
+		list-style:none;
+		margin-top:0;
+		& > li{
+			margin-bottom:0.1em;
+		}
+		& > li > ul > li{
+			margin-bottom:0;
+		}
+		li ul{
+			margin-left:1em !important;
+			li a{
+				font-size:0.9em;
+			}
+		}
+	}
+	a{
+		color:#555;
+	}
+}
+
+.thumbcaption{
+	font-size:0.8em;
+}
+
+/* Fixes for awkward form layouts, seen in RequestAccount */
+fieldset {
+	margin: 20px 0;
+}
+fieldset legend {
+	margin-bottom: 5px;
+}

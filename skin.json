@@ -43,11 +43,11 @@
 			"class": "ResourceLoaderSkinModule",
 			"position": "top",
 			"styles": {
-				"layouts/base/css/layout.less": {
+				"layouts/base/css/scaffold.less": {
 					"media": "screen"
 				},
-				"layouts/base/css/content.less": {
-					"media": "screen"
+				"layouts/base/css/print.less": {
+					"media": "print"
 				}
 			}
 		},
@@ -62,12 +62,7 @@
 			"class": "ResourceLoaderSkinModule",
 			"position": "top",
 			"styles": {
-				"layouts/default/css/layout.less": {
-					"media": "screen"
-				},
-				"layouts/default/css/content.less": {
-					"media": "screen"
-				}
+
 			}
 		}
 	},

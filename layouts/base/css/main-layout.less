@@ -1,0 +1,58 @@
+body{
+	background: @background-color;
+}
+
+html{
+	min-height:100vh;
+}
+body{
+	min-height:100vh;
+
+	#page{
+		@media screen {
+			.flexbox();
+			.flex-direction(column);
+			.align-content(stretch);
+			.flex-grow(1);
+			.flex-shrink(0);
+			flex: 1 0;
+			overflow-y: scroll;
+		}
+
+
+		#lower-container{
+			.flex-grow(1);
+			flex: 1 0 auto;
+		}
+		#lower-container:after{
+			content:"";
+			clear:both;
+		}
+		#main-footer{
+
+		}
+	}
+}
+
+.nav li{
+	position:relative;
+}
+/*#ca-edit::before{
+	.glyphicon;
+	position:absolute;
+	top:0;
+	left:0;
+}*/
+/*#ca-edit{
+	.glyphicon-edit;
+}*/
+
+/* Hide toolbox menu for non-logged in users */
+body:not(.user-loggedin) .toolbox-menu{
+	display:none !important;
+}
+
+/* Prevent increased font size from interfering with existing MW layout */
+.mw-ui-container{
+	font-size:0.8em;
+}

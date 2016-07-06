@@ -1,0 +1,215 @@
+.navbar{
+	.first{
+		.order(0);
+	}
+	.second{
+		.order(20);
+	}
+	.third{
+		.order(30);
+	}
+	.fourth{
+		.order(40);
+	}
+	.last{
+		.order(999);
+	}
+}
+
+
+#top-nav{
+	flex:0 0 50px;
+	.flexbox();
+	.flex-direction(row);
+
+	border:none;
+}
+
+/* Give the various iframes VisualEditor embeds a white background */
+.ve-ui-frame-body{
+	background:white;
+}
+
+/* Rules which affect more or less all navbar styles */
+#top-nav{
+
+	margin-bottom:0;
+	border-radius:0;
+
+	.container{
+		position:relative;
+	}
+
+	.container
+
+	.navbar-menu-toggle{
+		left:5px;
+		top:0;
+		.icon{
+			font-size:2em;
+		}
+		.navbar-toggle{
+			margin:0;
+		}
+		button{
+			color:@navbar-text-color;
+		}
+	}
+
+	.navbar-brand{
+		display:block;
+		float:none;
+		margin:0 20px;
+		text-align:center;
+	}
+
+
+	@media (min-width: @screen-sm-min) {
+
+		//menus are collapsed by default, but they should be visible on higher resolutions
+		.navbar-menu.collapse{
+			display:block;
+		}
+
+		.navbar-brand{
+			display:inline-block;
+			float:none;
+			margin:0;
+			text-align:left;
+			padding-left:0;
+		}
+
+		.navbar-toggle{
+			display:none;
+		}
+	}
+
+}
+
+@media (min-width: @screen-sm-min) {
+	/* Correct display errors when using flexbox */
+	.navbar:before, .navbar:after,
+	#top-nav .container:before, #top-nav .container:after{
+		display:none !important;
+	}
+}
+
+/* Rules for the default navbar style */
+#top-nav.default{
+	#gradient .vertical(lighten(@navbar-bg-color, 2%); darken(@navbar-bg-color, 2%));
+	color: @navbar-text-color;
+
+	a{
+		color: @navbar-text-color;
+	}
+
+	.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+	    background-color: @accent-color;
+	}
+	.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: @accent-color;
+	}
+	.dropdown-menu{
+		background-color: @accent-color;
+		border-color:lighten(@accent-color,10%)
+	}
+	.dropdown-menu .divider{
+		background-color:lighten(@accent-color,20%)
+	}
+	.dropdown-menu > li > a:focus {
+		background-color: @accent-color;
+	}
+	.dropdown-menu > li > a:hover{
+		background-color: darken(@accent-color, 8%)
+	}
+
+	.navbar-brand .topnav-name{
+		font-weight: bold;
+		font-size: 120%;
+	}
+
+
+	@media (max-width: @screen-sm-min){
+
+		.navbar-brand{
+			display:inline-block;
+			float:none;
+			text-align:center;
+			margin:0 auto;
+			padding-left:0;
+		}
+
+		.navbar-search{
+			display:block;
+		}
+
+	}
+	.navbar-menu{
+
+		.title{
+			display:inline;
+		}
+
+	}
+
+
+
+	@media (min-width: @screen-sm-min) {
+
+		.navbar-menu-toggle{
+			display: none;
+		}
+
+		.container{
+			.flexbox();
+			.flex-direction(row);
+			.justify-content(space-between);
+			.align-items(center);
+		}
+
+		.navbar-search{
+			flex:1 1;
+			display: flex;
+    	align-items: flex-end;
+    	justify-content: center;
+			form{
+    		flex: 0 1 300px;
+			}
+		}
+
+		.navbar-menu{
+			display:block;
+			/* Hide titles when displaying inline */
+			&.icons-only .nav .title{
+				display:none;
+			}
+			/* Undo the collapsing which happens at screen-sm-min by default */
+			.navbar-nav{
+				margin:0;
+				& > li{
+					display:inline-block;
+					float:none;
+				}
+			}
+
+		}
+
+		.navbar-links{
+			ul{
+				float:none;
+				.flexbox();
+				.flex-direction(row);
+				.justify-content(space-between);
+				li{
+					float:none;
+				}
+			}
+		}
+
+		.navbar-search, .navbar-brand, .navbar-menu{
+
+		}
+
+	}
+} /* /#top-nav */

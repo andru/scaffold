@@ -1,0 +1,119 @@
+/* Styling for MediaWiki classes and overrides for existing MediaWiki CSS */
+
+li.new a,
+a.new{
+	color:@new-link-color;
+}
+
+a.external:before{
+	.fa;
+	font-size:0.8em;
+	margin-right:1px;
+	content: "\f0ac";
+}
+.plainlinks a.external:before{
+	content:"";
+	margin:0;
+};
+
+#wpSave,
+#wpPreview,
+#wpDiff,
+input[type=submit],
+input[type=button],
+button{
+	.btn;
+}
+#wpSave{
+	.button-variant(@inverse-text-color, @accent-color, darken(@accent-color, 10%));
+}
+
+/* Semantic Forms multiple template adder */
+.multipleTemplateAdder{
+	.btn;
+	.button-variant(@inverse-text-color, @accent-color, darken(@accent-color, 10%));
+}
+
+/* Reset the TOC */
+#toc, .toc{
+	width:auto;
+	display:block;
+	border:none;
+	#toctitle{
+		text-align: left;
+	}
+	.tocnumber{
+		display:none;
+	}
+}
+
+
+#contentSub{
+	font-size:0.8em;
+}
+
+/* Override default styles for VisualEditor. body tag selector gives higher specificity than the
+VisualEditor selectors, which will be appended to the page *after* this file */
+body{
+	.flexbox();
+	.flex-direction(column);
+	height:100%;
+	height:100vh;
+	overflow:hidden;
+
+
+	/* By default make toolbar always static, we'll override it for larger displays */
+	.ve-ui-surfaceToolbar-floating .ve-ui-toolbar-bar,
+	.ve-ui-toolbar-bar{
+		position:static;
+		overflow:visible !important;
+	}
+	.ve-ui-toolbar-bar{
+		background-image:none;
+	}
+	.ve-ui-barToolGroup .ve-ui-tool {
+		height: 1.8em;
+		padding: 0.1em;
+	}
+	/* Ensure the modal is stacked ontop of everything else! */
+
+	.ve-ui-dialog{
+		z-index:99999999;
+	}
+
+	.ve-ui-inspector-content .ve-ui-window-body form{
+		/* Hack for a strange bug in VisualEditor forms which causes inputs to fly off out of view on the edit link popup */
+		whitespace:inherit !important;
+	}
+
+
+	@media (min-width: @screen-sm-min) {
+
+		/* Extra padding when VisualEditor toolbar is displayed fixed */
+		&.veaction-edit{
+			padding-top:110px;
+		}
+
+		/* VisualEditor should be a fixed position toolbar on higher resolutions */
+		.bootstrap-ve .ve-ui-surfaceToolbar-floating .ve-ui-toolbar-bar,
+		.bootstrap-ve .ve-ui-toolbar-bar{
+			position:fixed;
+			z-index:1;
+			overflow:visible;
+			top:50px;
+			left:0;
+			right:0;
+		}
+	}
+
+}
+
+
+#wpTextbox1{
+	width:100%;
+}
+
+
+.site-notice{
+	.alert-info;
+}

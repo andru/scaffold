@@ -1,0 +1,112 @@
+#content{
+	a{
+		color: @accent-color;
+	}
+	a:hover{
+		color:lighten(@accent-color,10%);
+	}
+}
+#content-container{
+
+	padding-top:0;
+
+	#content{
+		flex:1;
+		order:2;
+
+		/* Hide standard TOC */
+		.toc{
+			display:none;
+		}
+	}
+
+	.shared-sidebar{
+		flex-basis: 200px;
+		.fancy-toc{
+			margin-top:20px;
+		}
+
+		/* The sidebar TOC is hidden on mobile devices */
+		.toc{
+			display:none;
+		}
+
+	}
+	nav#related{
+
+		margin:20px 0 0 0;
+
+		.related-nav-section{
+			flex: 0 0 150px;
+		}
+	}
+
+	/* When the navbar is static, we don't get it's margin. */
+	@media (min-width: @screen-sm-min) {
+		padding-top:10px;
+	}
+	@media (min-width: @screen-md-min) {
+
+		/* Bigger screens get sidebars */
+		.flexbox();
+		.flex-direction(row);
+
+		&.has-toc{
+			#content{
+				order: 2;
+
+				.toc{
+					display: none;
+				}
+			}
+			.shared-sidebar{
+				padding:0 20px 0 0;
+
+				.toc{
+					display:block;
+					h2{
+						font-size:1.3em;
+					}
+					& > ul{
+						padding:5px;
+						list-style:none;
+						ul {
+							list-style: none;
+							margin-left: 5px;
+							padding: 0;
+							font-size:90%;
+						}
+					}
+					a{
+						color: #555;
+					}
+				}
+			}
+		}
+
+		.shared-sidebar{
+			.flexbox();
+			.flex-direction(row);
+			.flex-direction(column);
+
+			order: 1;
+			margin: 0 20px 0 0;
+
+		}
+
+		nav#related{
+			.flexbox();
+			.flex-direction(row);
+			.justify-content(start);
+			order:3;
+			.flex-basis(150px);
+			.flex-direction(column);
+
+			margin: 0 0 0 20px;
+
+			.related-nav-section{
+				flex: 0 0 150px;
+			}
+		}
+	}
+}

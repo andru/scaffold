@@ -1,0 +1,92 @@
+/* Fixes for labels following checkboxes, make label inline */
+input[type=checkbox] + label,
+input[type=radio] + label {
+	display: inline;
+	margin-left: 5px;
+}
+
+.hero#jumbotron{
+	padding:10px 20px 20px 20px;
+	margin-top:-21px; /* For navbar header */
+	background-color:darken(@navbar-bg-color,2%);
+	color:@navbar-text-color;
+}
+
+body.page-Main_Page .page-title{
+	display:none;
+}
+
+.infobox{
+	box-sizing: content-box;
+
+	padding:10px 0;
+
+	.article-image{
+		width: 300px;
+		margin: 0 auto;
+	}
+
+	@media (min-width: @screen-sm-min){
+		width:300px;
+		float:right;
+		padding: 10px 0 10px 10px;
+	}
+
+	.infobox-table{
+		width:100%;
+	}
+}
+
+#content-container{
+	img{
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+/* If infobox has been moved into skin */
+#content-container > .infobox{
+	order:3;
+}
+
+.panel .panel-heading:nth-child(n+2) {
+  background-color:transparent;
+	border-top-width: 1px;
+	border-bottom-width: 0;
+	padding:5px;
+	margin-top: 5px;
+}
+.panel .panel-heading:nth-child(2) {
+	border-top-width: 0;
+}
+.infobox .table{
+	th{
+		font-weight: normal;
+		font-size: 80%;
+		padding-bottom: 0;
+	}
+	td{
+		padding:2px;
+	}
+}
+
+table.wikitable{
+	.table;
+	.table-condensed;
+	border:none;
+	background-color:transparent;
+
+	> * > tr > td,
+	> * > tr > th{
+		border:none;
+	}
+}
+
+.searchresults{
+	h2{
+		clear:left;
+	}
+	.mw-search-results{
+		float:none;
+	}
+}
